@@ -5,9 +5,9 @@ This document provides instructions on how to compile and run the sequential, Op
 ## System Requirements
 
 *   **OS:** Linux (tested on Ubuntu/Debian-based distributions)
-*   **Compiler:** g++ with C++17 support
+*   **Compiler:** `g++` with C++17 support
 *   **Libraries:**
-    *   OpenMP (usually included with modern g++)
+    *   OpenMP (usually included with modern `g++`)
     *   MPI (e.g., OpenMPI)
     *   Eigen3
 
@@ -18,7 +18,7 @@ This document provides instructions on how to compile and run the sequential, Op
     sudo apt update
     ```
 
-2.  Install build tools (including g++ and OpenMP):
+2.  Install build tools (including `g++` and OpenMP):
     ```bash
     sudo apt install build-essential -y
     ```
@@ -69,8 +69,9 @@ The script will:
 *   Compile the source files.
 *   Run the sequential version for different data sizes.
 *   Run the MPI version for different data sizes and process counts.
-    *   **Note:** The OpenMP execution section is currently commented out in `run.sh`. You can uncomment it to run those tests as well.
+    > [!NOTE]
+    > The OpenMP execution section is currently commented out in `run.sh`. You can uncomment it to run those tests as well.
 
 ## Output
 
-Timing results and any other output from the programs will be saved in files within the respective `result_seq/`, `result_openmp/`, and `result_mpi/` directories. The filenames typically indicate the parameters used for the run (e.g., number of rows, threads, processes).
+Timing results and any other output from the programs will be saved in files within the respective `result_seq/`, `result_openmp/`, and `result_mpi/` directories. The filenames typically indicate the parameters used for the run (e.g., number of rows, threads, processes). 
