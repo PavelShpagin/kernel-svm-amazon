@@ -1,0 +1,12 @@
+Seq: Train Rows:100, Test Rows:100, Train Time:0.0101662, Test Time:0.00473055, Accuracy:0.64
+Seq: Train Rows:1000, Test Rows:1000, Train Time:5.96778, Test Time:0.341229, Accuracy:0.742
+Seq: Train Rows:2000, Test Rows:2000, Train Time:52.0063, Test Time:1.71038, Accuracy:0.768
+MPI: Train Rows:100, Test Rows:100, Train Time:0.00791767, Test Time:0.00132234, Accuracy:0.64, Processes:2
+MPI: Train Rows:100, Test Rows:100, Train Time:0.0115461, Test Time:0.00523288, Accuracy:0.64, Processes:4
+MPI: Train Rows:100, Test Rows:100, Train Time:0.0857575, Test Time:0.00233878, Accuracy:0.64, Processes:6
+MPI: Train Rows:1000, Test Rows:1000, Train Time:1.85603, Test Time:0.285536, Accuracy:0.74, Processes:2
+MPI: Train Rows:1000, Test Rows:1000, Train Time:2.39162, Test Time:0.256633, Accuracy:0.74, Processes:4
+MPI: Train Rows:1000, Test Rows:1000, Train Time:3.22811, Test Time:0.24743, Accuracy:0.74, Processes:6
+MPI: Train Rows:2000, Test Rows:2000, Train Time:17.7893, Test Time:1.22769, Accuracy:0.757, Processes:2
+MPI: Train Rows:2000, Test Rows:2000, Train Time:25.7077, Test Time:1.08919, Accuracy:0.757, Processes:4
+MPI: Train Rows:2000, Test Rows:2000, Train Time:34.2207, Test Time:1.01965, Accuracy:0.757, Processes:6
