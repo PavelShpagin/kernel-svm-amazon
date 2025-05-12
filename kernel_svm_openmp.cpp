@@ -103,12 +103,12 @@ Eigen::MatrixXd buildKernelMatrix(const std::vector<DataPoint>& data) {
     int n = data.size();
     Eigen::MatrixXd K(n, n);
     
-    #pragma omp parallel for shared(data, K)
+    #pragma omp parallel for collapse(2) shared(data, K)
     for (int i = 0; i < n; i++) {
-        K(i, i) = polyKernel(data[i].x, data[i].x);
-        for (int j = 0; j < i; j++) {
-            K(i, j) = polyKernel(data[i].x, data[j].x);
-            K(j, i) = K(i, j);
+        for (int j = 0; j <= i; j++) {  // Changed to <= i to include diagonal
+            double val = polyKernel(data[i].x, data[j].x);
+            K(i, j) = val;
+            K(j, i) = val;  // Matrix is symmetric
         }
     }
     return K;
@@ -130,12 +130,15 @@ Eigen::VectorXd newtonMethod(
     const double alpha_ls = 0.1;
     const double beta_ls = 0.5;
 
+    // Pre-allocate matrices and vectors
+    Eigen::MatrixXd KKT = Eigen::MatrixXd::Zero(n + p, n + p);
+    Eigen::VectorXd rhs = Eigen::VectorXd::Zero(n + p);
+    Eigen::VectorXd dxy = Eigen::VectorXd::Zero(n + p);
+    Eigen::VectorXd dx = Eigen::VectorXd::Zero(n);
+
     for (int iter = 0; iter < maxIter; ++iter) {
         Eigen::VectorXd grad = gradFunc(x);
         Eigen::MatrixXd hess = hessFunc(x);
-        
-        Eigen::MatrixXd KKT = Eigen::MatrixXd::Zero(n + p, n + p);
-        Eigen::VectorXd rhs = Eigen::VectorXd::Zero(n + p);
         
         KKT.block(0, 0, n, n) = hess;
         if (p > 0) {
@@ -146,9 +149,9 @@ Eigen::VectorXd newtonMethod(
 
         Eigen::MatrixXd regularized_KKT = KKT;
         regularized_KKT.block(0,0,n,n) += 1e-9 * Eigen::MatrixXd::Identity(n,n);
-        Eigen::VectorXd dxy = regularized_KKT.ldlt().solve(rhs);
+        dxy = regularized_KKT.ldlt().solve(rhs);
 
-        Eigen::VectorXd dx = dxy.head(n);
+        dx = dxy.head(n);
 
         double lambda_sq = -grad.dot(dx);
 
@@ -210,27 +213,33 @@ Eigen::VectorXd interiorQP(
         double sum = 0.0;
         if (phase1) {
             double s = current_x(n_orig);
+            #pragma omp parallel for reduction(+:sum)
             for (int i = 0; i < n_orig; ++i) {
                 double term1 = s + current_x(i);
                 double term2 = s - current_x(i) + C_param;
-                if (term1 <= 0 || term2 <= 0) return std::numeric_limits<double>::infinity();
-                sum -= std::log(std::max(term1, MIN_BARRIER_TERM_QP));
-                sum -= std::log(std::max(term2, MIN_BARRIER_TERM_QP));
+                if (term1 <= 0 || term2 <= 0) {
+                    sum = std::numeric_limits<double>::infinity();
+                    //break;  // Early exit if infeasible
+                }
+                else {
+                    sum -= std::log(std::max(term1, MIN_BARRIER_TERM_QP));
+                    sum -= std::log(std::max(term2, MIN_BARRIER_TERM_QP));
+                }
             }
         } else {
-            double thread_sum = 0.0;
-            #pragma omp parallel for shared(current_x) reduction(+:thread_sum)
+            #pragma omp parallel for reduction(+:sum)
             for (int i = 0; i < n_orig; ++i) {
                 double term1 = current_x(i);
                 double term2 = C_param - current_x(i);
                 if (term1 <= 0 || term2 <= 0) {
-                    thread_sum = std::numeric_limits<double>::infinity();
-                } else {
-                    thread_sum -= std::log(std::max(term1, MIN_BARRIER_TERM_QP));
-                    thread_sum -= std::log(std::max(term2, MIN_BARRIER_TERM_QP));
+                    sum = std::numeric_limits<double>::infinity();
+                    //break;  // Early exit if infeasible
+                }
+                else {
+                    sum -= std::log(std::max(term1, MIN_BARRIER_TERM_QP));
+                    sum -= std::log(std::max(term2, MIN_BARRIER_TERM_QP));
                 }
             }
-            sum = thread_sum;
         }
         return sum;
     };
@@ -240,6 +249,7 @@ Eigen::VectorXd interiorQP(
         if (phase1) {
             double s = current_x(n_orig);
             double grad_s = 0.0;
+            #pragma omp parallel for shared(current_x) reduction(+:grad_s)
             for (int i = 0; i < n_orig; ++i) {
                 double term1 = std::max(s + current_x(i), MIN_BARRIER_TERM_QP);
                 double term2 = std::max(s - current_x(i) + C_param, MIN_BARRIER_TERM_QP);
@@ -263,6 +273,7 @@ Eigen::VectorXd interiorQP(
         if (phase1) {
             double s = current_x(n_orig);
             double H_ss = 0.0;
+            #pragma omp parallel for shared(current_x) reduction(+:H_ss)
             for (int i = 0; i < n_orig; ++i) {
                 double term1 = std::max(s + current_x(i), MIN_BARRIER_TERM_QP);
                 double term2 = std::max(s - current_x(i) + C_param, MIN_BARRIER_TERM_QP);

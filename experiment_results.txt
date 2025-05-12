@@ -1,12 +1,40 @@
-Seq: Train Rows:100, Test Rows:100, Train Time:0.0101662, Test Time:0.00473055, Accuracy:0.64
-Seq: Train Rows:1000, Test Rows:1000, Train Time:5.96778, Test Time:0.341229, Accuracy:0.742
-Seq: Train Rows:2000, Test Rows:2000, Train Time:52.0063, Test Time:1.71038, Accuracy:0.768
-MPI: Train Rows:100, Test Rows:100, Train Time:0.00791767, Test Time:0.00132234, Accuracy:0.64, Processes:2
-MPI: Train Rows:100, Test Rows:100, Train Time:0.0115461, Test Time:0.00523288, Accuracy:0.64, Processes:4
-MPI: Train Rows:100, Test Rows:100, Train Time:0.0857575, Test Time:0.00233878, Accuracy:0.64, Processes:6
-MPI: Train Rows:1000, Test Rows:1000, Train Time:1.85603, Test Time:0.285536, Accuracy:0.74, Processes:2
-MPI: Train Rows:1000, Test Rows:1000, Train Time:2.39162, Test Time:0.256633, Accuracy:0.74, Processes:4
-MPI: Train Rows:1000, Test Rows:1000, Train Time:3.22811, Test Time:0.24743, Accuracy:0.74, Processes:6
-MPI: Train Rows:2000, Test Rows:2000, Train Time:17.7893, Test Time:1.22769, Accuracy:0.757, Processes:2
-MPI: Train Rows:2000, Test Rows:2000, Train Time:25.7077, Test Time:1.08919, Accuracy:0.757, Processes:4
-MPI: Train Rows:2000, Test Rows:2000, Train Time:34.2207, Test Time:1.01965, Accuracy:0.757, Processes:6
+MPI: Train Rows:200, Test Rows:200, Train Time:0.0274405, Test Time:0.00907941, Accuracy:0.765, Processes:2
+MPI: Train Rows:200, Test Rows:200, Train Time:0.0182445, Test Time:0.0039754, Accuracy:0.765, Processes:4
+MPI: Train Rows:200, Test Rows:200, Train Time:0.0250212, Test Time:0.00544131, Accuracy:0.765, Processes:6
+MPI: Train Rows:500, Test Rows:500, Train Time:0.296661, Test Time:0.0559606, Accuracy:0.734, Processes:2
+MPI: Train Rows:500, Test Rows:500, Train Time:0.28571, Test Time:0.0486628, Accuracy:0.734, Processes:4
+MPI: Train Rows:500, Test Rows:500, Train Time:0.336085, Test Time:0.052811, Accuracy:0.734, Processes:6
+MPI: Train Rows:1000, Test Rows:1000, Train Time:1.79485, Test Time:0.253486, Accuracy:0.74, Processes:2
+MPI: Train Rows:1000, Test Rows:1000, Train Time:1.83677, Test Time:0.22642, Accuracy:0.74, Processes:4
+MPI: Train Rows:1000, Test Rows:1000, Train Time:2.01682, Test Time:0.266043, Accuracy:0.74, Processes:6
+MPI: Train Rows:2000, Test Rows:2000, Train Time:13.6463, Test Time:1.2175, Accuracy:0.757, Processes:2
+MPI: Train Rows:2000, Test Rows:2000, Train Time:14.8506, Test Time:1.08691, Accuracy:0.757, Processes:4
+MPI: Train Rows:2000, Test Rows:2000, Train Time:15.5748, Test Time:1.08245, Accuracy:0.757, Processes:6
+MPI: Train Rows:5000, Test Rows:5000, Train Time:387.85, Test Time:9.02, Accuracy:0.7664, Processes:2
+MPI: Train Rows:5000, Test Rows:5000, Train Time:409.431, Test Time:7.63893, Accuracy:0.7664, Processes:4
+MPI: Train Rows:5000, Test Rows:5000, Train Time:439.509, Test Time:7.2446, Accuracy:0.7664, Processes:6
+Seq: Train Rows:200, Test Rows:200, Train Time:0.0767272, Test Time:0.0181774, Accuracy:0.765
+Seq: Train Rows:500, Test Rows:500, Train Time:0.998954, Test Time:0.0881234, Accuracy:0.732
+Seq: Train Rows:1000, Test Rows:1000, Train Time:5.78444, Test Time:0.439433, Accuracy:0.742
+Seq: Train Rows:2000, Test Rows:2000, Train Time:50.2197, Test Time:1.57116, Accuracy:0.768
+Seq: Train Rows:5000, Test Rows:5000, Train Time:1432.83, Test Time:11.3514, Accuracy:0.801
+OpenMP: Train Rows:200, Test Rows:200, Train Time:0.0650926, Test Time:0.0108876, Accuracy:0.765Threads:2
+OpenMP: Train Rows:200, Test Rows:200, Train Time:0.0656971, Test Time:0.0104801, Accuracy:0.765Threads:4
+OpenMP: Train Rows:200, Test Rows:200, Train Time:0.0723594, Test Time:0.00947521, Accuracy:0.765Threads:8
+OpenMP: Train Rows:200, Test Rows:200, Train Time:0.0775007, Test Time:0.00941955, Accuracy:0.765Threads:12
+OpenMP: Train Rows:500, Test Rows:500, Train Time:0.879067, Test Time:0.0390367, Accuracy:0.732Threads:2
+OpenMP: Train Rows:500, Test Rows:500, Train Time:0.915247, Test Time:0.0347046, Accuracy:0.732Threads:4
+OpenMP: Train Rows:500, Test Rows:500, Train Time:0.93288, Test Time:0.028873, Accuracy:0.732Threads:8
+OpenMP: Train Rows:500, Test Rows:500, Train Time:0.95269, Test Time:0.0262668, Accuracy:0.732Threads:12
+OpenMP: Train Rows:1000, Test Rows:1000, Train Time:5.19877, Test Time:0.154965, Accuracy:0.742Threads:2
+OpenMP: Train Rows:1000, Test Rows:1000, Train Time:5.24403, Test Time:0.09311, Accuracy:0.742Threads:4
+OpenMP: Train Rows:1000, Test Rows:1000, Train Time:3.65955, Test Time:0.0723907, Accuracy:0.742Threads:8
+OpenMP: Train Rows:1000, Test Rows:1000, Train Time:5.27774, Test Time:0.066972, Accuracy:0.742Threads:12
+OpenMP: Train Rows:2000, Test Rows:2000, Train Time:40.7624, Test Time:0.894747, Accuracy:0.768Threads:2
+OpenMP: Train Rows:2000, Test Rows:2000, Train Time:39.4728, Test Time:0.469399, Accuracy:0.768Threads:4
+OpenMP: Train Rows:2000, Test Rows:2000, Train Time:41.4124, Test Time:0.301124, Accuracy:0.768Threads:8
+OpenMP: Train Rows:2000, Test Rows:2000, Train Time:42.9505, Test Time:0.242065, Accuracy:0.768Threads:12
+OpenMP: Train Rows:5000, Test Rows:5000, Train Time:1233.67, Test Time:7.31573, Accuracy:0.801Threads:2
+OpenMP: Train Rows:5000, Test Rows:5000, Train Time:1195.7, Test Time:2.41814, Accuracy:0.801Threads:4
+OpenMP: Train Rows:5000, Test Rows:5000, Train Time:1212.97, Test Time:2.03675, Accuracy:0.801Threads:8
+OpenMP: Train Rows:5000, Test Rows:5000, Train Time:1293.05, Test Time:1.5597, Accuracy:0.801Threads:12
